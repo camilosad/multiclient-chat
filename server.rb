@@ -3,8 +3,8 @@ require "socket"
 class Server
 
   # system messages
-  USERNAME_ALREADY_TAKEN = "This username already exist".freeze
-  NEW_CONNECTION = 'New user connected: '.freeze
+  USERNAME_ALREADY_TAKEN = "Username already taken, please try again with another one.".freeze
+  NEW_CONNECTION = 'New user connected'.freeze
   SUCCESSFULLY_CONNECTED = 'Successfully connected!'.freeze
   SERVER_RUNNING = 'Server started successfully. Waiting for clients to connect...'.freeze
 
@@ -20,8 +20,6 @@ class Server
    def run
     puts SERVER_RUNNING
     loop do
-      # for each user connected and accepted by server, it will create a new thread object
-      # and which pass the connected client as an instance to the block
       Thread.start(@server.accept) do | client |
         username = get_username client
         unless can_create_client username, client
@@ -81,6 +79,6 @@ class Server
   end
 
   def show_connection(username, client)
-    puts NEW_CONNECTION, "#{client} as #{username}"
+    puts "#{NEW_CONNECTION}: #{client} as #{username}"
   end
 end
