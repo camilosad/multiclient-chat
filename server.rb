@@ -6,6 +6,7 @@ class Server
   USERNAME_ALREADY_TAKEN = "This username already exist".freeze
   NEW_CONNECTION = 'New user connected: '.freeze
   SUCCESSFULLY_CONNECTED = 'Successfully connected!'.freeze
+  SERVER_RUNNING = 'Server started successfully. Waiting for clients to connect...'.freeze
 
 
   def initialize(ip, port)
@@ -17,6 +18,7 @@ class Server
   end
 
    def run
+    puts SERVER_RUNNING
     loop do
       # for each user connected and accepted by server, it will create a new thread object
       # and which pass the connected client as an instance to the block
@@ -27,7 +29,7 @@ class Server
           Thread.kill self
         end
         create_client username, client
-        confirm_connection username, client
+        show_connection username, client
         send_alert_to_client client, SUCCESSFULLY_CONNECTED
         listen_to_user username, client
       end
@@ -78,7 +80,7 @@ class Server
     return true
   end
 
-  def confirm_connection(username, client)
+  def show_connection(username, client)
     puts NEW_CONNECTION, "#{client} as #{username}"
   end
 end
