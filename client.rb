@@ -2,9 +2,11 @@ require "socket"
 
 class Client
 
+  Thread.abort_on_exception = true
+
   REGISTRATION = 'Type your username: '.freeze
 
-  def initialize( server )
+  def initialize(server)
     @server = server
     @request = nil
     @response = nil
