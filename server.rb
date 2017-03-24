@@ -16,7 +16,7 @@ class Server
     @connections  = []
   end
 
-   def run
+  def run
     puts SERVER_RUNNING
 
     loop do

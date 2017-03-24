@@ -6,8 +6,8 @@ class Client
 
   REGISTRATION = 'Type your username: '.freeze
 
-  def initialize(server)
-    @server = server
+  def initialize(ip, port)
+    @server = TCPSocket.open ip, port
     @request = nil
     @response = nil
   end
